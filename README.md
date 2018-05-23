@@ -17,30 +17,36 @@ Given data like the following, generate a PDF invoice:
 
 ```go
 data := []struct {
-		UnitName       string
-		PricePerUnit   int
-		UnitsPurchased int
-	}{
-		{
-			UnitName:       "2x6 Lumber - 8'",
-			PricePerUnit:   375, // in cents
-			UnitsPurchased: 220,
-		}, {
-			UnitName:       "Drywall Sheet",
-			PricePerUnit:   822, // in cents
-			UnitsPurchased: 50,
-		}, {
-			UnitName:       "Paint",
-			PricePerUnit:   1455, // in cents
-			UnitsPurchased: 3,
-		},
-	}
+  UnitName       string
+  PricePerUnit   int
+  UnitsPurchased int
+}{
+  {
+    UnitName:       "2x6 Lumber - 8'",
+    PricePerUnit:   375, // in cents
+    UnitsPurchased: 220,
+  }, {
+    UnitName:       "Drywall Sheet",
+    PricePerUnit:   822, // in cents
+    UnitsPurchased: 50,
+  }, {
+    UnitName:       "Paint",
+    PricePerUnit:   1455, // in cents
+    UnitsPurchased: 3,
+  },
+}
 ```
 
 The invoice should look something like this:
 
-### Course Completion Certificat
+
+
+### Course Completion Certificate
 
 Create a course completion cert.
 
 TODO(joncalhoun): Finish this section.
+
+## Bonus
+
+Make the invoice and the course completion certificate look better!
