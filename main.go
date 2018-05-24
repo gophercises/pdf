@@ -52,12 +52,55 @@ func main() {
 	pdf.MoveTo(w-xIndent-124.0, (bannerHt-(lineHt*1.5*3.0))/2.0)
 	pdf.MultiCell(124.0, lineHt*1.5, "123 Fake St\nSome Town, PA\n12345", gofpdf.BorderNone, gofpdf.AlignRight, false)
 
+	// Summary - Billed To, Invoice #, Date of Issue
+	_, sy := summaryBlock(pdf, xIndent, bannerHt+lineHt*2.0, "Billed To", "Client Name", "123 Client Address", "City, State, Country", "Postal Code")
+	summaryBlock(pdf, xIndent*2.0+lineHt*12.5, bannerHt+lineHt*2.0, "Invoice Number", "0000000123")
+	summaryBlock(pdf, xIndent*2.0+lineHt*12.5, bannerHt+lineHt*6.25, "Date of Issue", "05/29/2018")
+
+	// Summary - Invoice Total
+	x, y := w-xIndent-124.0, bannerHt+lineHt*2.25
+	pdf.MoveTo(x, y)
+	pdf.SetFont("times", "", 14)
+	_, lineHt = pdf.GetFontSize()
+	pdf.SetTextColor(180, 180, 180)
+	pdf.CellFormat(124.0, lineHt, "Invoice Total", gofpdf.BorderNone, gofpdf.LineBreakNone, gofpdf.AlignRight, false, 0, "")
+	x, y = x+2.0, y+lineHt*1.5
+	pdf.MoveTo(x, y)
+	pdf.SetFont("times", "", 48)
+	_, lineHt = pdf.GetFontSize()
+	alpha := 58
+	pdf.SetTextColor(72+alpha, 42+alpha, 55+alpha)
+	totalUSD := "$1234.56"
+	pdf.CellFormat(124.0, lineHt, totalUSD, gofpdf.BorderNone, gofpdf.LineBreakNone, gofpdf.AlignRight, false, 0, "")
+	x, y = x-2.0, y+lineHt*1.25
+
+	if sy > y {
+		y = sy
+	}
+	x, y = xIndent-20.0, y+30.0
+	pdf.Rect(x, y, w-(xIndent*2.0)+40.0, 3.0, "F")
+
 	// Grid
 	// drawGrid(pdf)
-	err := pdf.OutputFileAndClose("p2.pdf")
+	err := pdf.OutputFileAndClose("p3.pdf")
 	if err != nil {
 		panic(err)
 	}
+}
+
+func summaryBlock(pdf *gofpdf.Fpdf, x, y float64, title string, data ...string) (float64, float64) {
+	pdf.SetFont("times", "", 14)
+	pdf.SetTextColor(180, 180, 180)
+	_, lineHt := pdf.GetFontSize()
+	y = y + lineHt
+	pdf.Text(x, y, title)
+	y = y + lineHt*.25
+	pdf.SetTextColor(50, 50, 50)
+	for _, str := range data {
+		y = y + lineHt*1.25
+		pdf.Text(x, y, str)
+	}
+	return x, y
 }
 
 func drawGrid(pdf *gofpdf.Fpdf) {
