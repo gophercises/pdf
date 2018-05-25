@@ -1,6 +1,6 @@
 # Exercise #20: Building PDFs
 
-[![exercise status: in progress](https://img.shields.io/badge/exercise%20status-in%20progress-yellow.svg?style=for-the-badge)](https://gophercises.com/exercises/pdf)
+[![exercise status: released](https://img.shields.io/badge/exercise%20status-released-green.svg?style=for-the-badge)](https://gophercises.com/exercises/pdf)
 
 ## Exercise details
 
